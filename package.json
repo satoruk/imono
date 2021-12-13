@@ -5,14 +5,19 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "start2": "ts-node examples/ts/src/imono/index.ts",
     "quicktype": "quicktype",
-    "gen": "quicktype --src Pokedex.json --src-lang json --lang ts --out src/models/foo/index.ts"
+    "gen1": "quicktype --src examples/ts/config/plan.json --src-lang json --lang ts --raw-type any --nice-property-names --acronym-style lowerCase --out examples/ts/src/imono/schemas/plan.ts",
+    "gen": "quicktype --src examples/ts/config/variables.json --src-lang json --lang ts --raw-type any --nice-property-names --acronym-style lowerCase --out examples/ts/src/imono/schemas/variables.ts"
   },
   "dependencies": {
-    "quicktype": "15.0.260"
+    "quicktype": "15.0.260",
+    "quicktype-core": "6.0.70",
+    "yaml": "1.10.2"
   },
   "devDependencies": {
     "@types/node": "16.11.12",
+    "@types/yaml": "1.9.7",
     "ts-node": "10.4.0",
     "typescript": "4.5.3"
   }

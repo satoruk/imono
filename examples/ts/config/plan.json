@@ -1,0 +1,19 @@
+{
+  "generators": {
+    "ddd": {
+      "name": "DDD",
+      "actions": [
+        {
+          "name": "model directory",
+          "path": "src/models",
+          "type": "direcotry"
+        },
+        {
+          "name": "model",
+          "path": "src/models/{{name}}.ts",
+          "type": "file"
+        }
+      ]
+    }
+  }
+}

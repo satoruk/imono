@@ -57,6 +57,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.12.tgz#ac7fb693ac587ee182c3780c26eb65546a1a3c10"
   integrity sha512-+2Iggwg7PxoO5Kyhvsq9VarmPbIelXP070HMImEpbtGCoyWNINQj4wzjbQCXzdHTRXnqufutJb5KAURZANNBAw==
 
+"@types/yaml@1.9.7":
+  version "1.9.7"
+  resolved "https://registry.yarnpkg.com/@types/yaml/-/yaml-1.9.7.tgz#2331f36e0aac91311a63d33eb026c21687729679"
+  integrity sha512-8WMXRDD1D+wCohjfslHDgICd2JtMATZU8CkhH8LVJqcJs6dyYj5TGptzP8wApbmEullGBSsCEzzap73DQ1HJaA==
+  dependencies:
+    yaml "*"
+
 acorn-walk@^8.1.1:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"
@@ -795,6 +802,24 @@ pump@^3.0.0:
     end-of-stream "^1.1.0"
     once "^1.3.1"
 
+quicktype-core@6.0.70:
+  version "6.0.70"
+  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-6.0.70.tgz#3be15eef505d356bc16fad01d2941d726c0a5700"
+  integrity sha512-BMoG1omvauNhgGFzz1AkFVIC0LPXPArE6cCGI5fTeHvXKQsVUCbHt+seee2TaqUkELX9Pk6yA0s8OW8vW3kllA==
+  dependencies:
+    "@mark.probst/unicode-properties" "~1.1.0"
+    browser-or-node "^1.2.1"
+    collection-utils "^1.0.1"
+    is-url "^1.2.4"
+    isomorphic-fetch "^2.2.1"
+    js-base64 "^2.4.3"
+    pako "^1.0.6"
+    pluralize "^7.0.0"
+    readable-stream "2.3.0"
+    urijs "^1.19.1"
+    wordwrap "^1.0.0"
+    yaml "^1.5.0"
+
 quicktype@15.0.260:
   version "15.0.260"
   resolved "https://registry.yarnpkg.com/quicktype/-/quicktype-15.0.260.tgz#ee3f3cf2a2d39b5e7ec38d8d91b3a88f01d0fae0"
@@ -1129,7 +1154,7 @@ unicode-trie@^0.3.0:
     pako "^0.2.5"
     tiny-inflate "^1.0.0"
 
-urijs@^1.19.4:
+urijs@^1.19.1, urijs@^1.19.4:
   version "1.19.7"
   resolved "https://registry.yarnpkg.com/urijs/-/urijs-1.19.7.tgz#4f594e59113928fea63c00ce688fb395b1168ab9"
   integrity sha512-Id+IKjdU0Hx+7Zx717jwLPsPeUqz7rAtuVBRLLs+qn+J2nf9NGITWVCxcijgYxBqe83C7sqsQPs6H1pyz3x9gA==
@@ -1220,7 +1245,7 @@ xtend@~4.0.1:
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.3.tgz#b5f259c82cd6e336921efd7bfd8bf560de9eeedf"
   integrity sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==
 
-yaml@^1.5.0:
+yaml@*, yaml@1.10.2, yaml@^1.5.0:
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
