@@ -1,0 +1,13 @@
+{
+  "name": "imono",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "quicktype": "quicktype",
+    "gen": "quicktype --src Pokedex.json --src-lang json --lang ts"
+  },
+  "dependencies": {
+    "quicktype": "15.0.260"
+  }
+}
