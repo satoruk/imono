@@ -1,0 +1,30 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": false
+  },
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "node_modules/": true
+  },
+  "yaml.completion": true,
+  "yaml.format.enable": true,
+  "yaml.hover": true,
+  "yaml.schemas": {
+    "./imono-schema.json": [
+      "examples/ts/config/imono.yaml",
+    ],
+    "examples/ts/config/variables-schema.json": [
+      "examples/ts/config/variables.yaml",
+    ],
+  },
+  "yaml.validate": true,
+  "xo.enable": true,
+  "xo.format.enable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  }
+}

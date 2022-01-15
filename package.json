@@ -1,24 +1,83 @@
 {
   "name": "imono",
   "version": "0.1.0",
-  "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "imono": "dist/cli/cli.js"
+  },
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "start2": "ts-node examples/ts/src/imono/index.ts",
-    "quicktype": "quicktype",
-    "gen1": "quicktype --src examples/ts/config/plan.json --src-lang json --lang ts --raw-type any --nice-property-names --acronym-style lowerCase --out examples/ts/src/imono/schemas/plan.ts",
-    "gen": "quicktype --src examples/ts/config/variables.json --src-lang json --lang ts --raw-type any --nice-property-names --acronym-style lowerCase --out examples/ts/src/imono/schemas/variables.ts"
+    "build": "tsc",
+    "dev": "ts-node src/cli/cli.tsx",
+    "genereate-config-schema": "ts-node src/dev/genereate-config.ts",
+    "pretest": "npm run build",
+    "start": "npm run build && dist/cli/cli.js",
+    "test": "tsc --project ./tsconfig.test.json && ava"
   },
   "dependencies": {
+    "ajv": "8.8.2",
+    "handlebars": "4.7.7",
+    "ink": "^3.2.0",
+    "lodash": "4.17.21",
+    "meow": "^9.0.0",
     "quicktype": "15.0.260",
     "quicktype-core": "6.0.70",
+    "react": "^17.0.2",
+    "typescript-json-schema": "0.52.0",
     "yaml": "1.10.2"
   },
   "devDependencies": {
+    "@ava/typescript": "^2",
+    "@sindresorhus/tsconfig": "^2.0.0",
+    "@types/lodash": "4.14.178",
     "@types/node": "16.11.12",
+    "@types/react": "^17.0.37",
     "@types/yaml": "1.9.7",
+    "ava": "^3.15.0",
+    "chalk": "^4.1.2",
+    "eslint-config-xo-react": "^0.25.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "ink-testing-library": "^2.1.0",
+    "source-map-support": "0.5.21",
     "ts-node": "10.4.0",
-    "typescript": "4.5.3"
+    "typescript": "^4.5.4",
+    "xo": "^0.39.1"
+  },
+  "ava": {
+    "files": [
+      "src/**/test.ts"
+    ],
+    "typescript": {
+      "extensions": [
+        "ts",
+        "tsx"
+      ],
+      "rewritePaths": {
+        "src/": "dist/"
+      },
+      "compile": false
+    }
+  },
+  "xo": {
+    "extends": "xo-react",
+    "ignores": [
+      "src/model/config/config.ts"
+    ],
+    "rules": {
+      "@typescript-eslint/no-redeclare": [
+        "error"
+      ],
+      "ava/no-ignored-test-files": [
+        "error",
+        {
+          "files": [
+            "src/**/*.test.(ts|tsx)",
+            "src/**/test.(ts|tsx)"
+          ]
+        }
+      ],
+      "no-redeclare": "off",
+      "react/prop-types": "off"
+    }
   }
 }
