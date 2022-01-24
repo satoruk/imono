@@ -1,40 +1,44 @@
-import path from 'path';
-import {existsSync, createWriteStream} from 'fs';
+import fs from 'fs';
+import util from 'util';
+import {Readable, Transform} from 'stream';
 
-import Action from './action';
+import Action, {ActionParameters} from './action';
 
-type CREATE_PARAMS1 = {
-	path: string;
-};
-type CREATE_PARAMS2 = {
-	/** 変数の展開されたフルキー */
-	fullKey: string;
-	/** 変数の展開するキー */
-	key: string;
-	/** アクションの対象となるファイルパス */
-	path: string;
-};
-export type CREATE_PARAMS = CREATE_PARAMS1 | CREATE_PARAMS2;
+export type FileActionParameters = ActionParameters;
+
+const rename = util.promisify(fs.rename);
 
 export default class FileAction<T> extends Action<T> {
 	override async execute(): Promise<void> {
+		console.log('AAAAAAAAAAAAA');
 		await this.pathMap(async parameters => {
-			if (!existsSync(parameters.path)) {
-				const ws = createWriteStream(parameters.path, {flags: 'a'});
-				for await (const line of this.onCreate(parameters)) {
-					ws.write(line + '\n');
-				}
-
-				ws.end();
-			}
+			const transform = await this.transform(parameters);
+			const tmppath = parameters.path + '.tmp';
+			const dest = fs.createWriteStream(tmppath, {flags: 'w'});
+			const src = createReadableStream(parameters.path);
+			await new Promise((resolve, reject) => {
+				console.log('promise start');
+				src.pipe(transform).pipe(dest).on('finish', () => {
+					console.log('promise success');
+					resolve('success');
+				}).on('error', () => {
+					console.error('promise error');
+					reject();
+				});
+			});
+			await rename(tmppath, parameters.path);
 		});
 	}
 
-	async * onCreate(parameters: CREATE_PARAMS): AsyncIterableIterator<string> {
-		const targetPath = path.resolve(this.context.root, parameters.path);
-		console.log(`		type: ${this.config.type}`);
-		console.log(`			${targetPath}`);
-
-		yield 'foo';
+	async transform(_parameters: FileActionParameters): Promise<Transform> {
+		throw new Error('Method not implemented.');
 	}
+}
+
+function createReadableStream(path: string): Readable {
+	if (fs.existsSync(path)) {
+		return fs.createReadStream(path);
+	}
+
+	return Readable.from([]);
 }

@@ -9,9 +9,18 @@ import * as config from '../config';
 import {Context} from '../context';
 import {Progress} from '../../util/event';
 
-type PATH_MAP_CALLBACK_PARAMS1 = {path: string};
-type PATH_MAP_CALLBACK_PARAMS2 = {path: string; key: string; fullKey: string};
-type PATH_MAP_CALLBACK = (parameters: PATH_MAP_CALLBACK_PARAMS1 | PATH_MAP_CALLBACK_PARAMS2) => Promise<void>;
+export type ActionPathParameters = {
+	/** アクションの対象となるファイルパス */
+	path: string;
+};
+export type ActionKeyParameters = {
+	/** 変数の展開するキー */
+	key: string;
+	/** アクションの対象となるファイルパス */
+	path: string;
+};
+export type ActionParameters = ActionPathParameters | ActionKeyParameters;
+type Callback = (parameters: ActionParameters) => Promise<void>;
 
 export default class Action<T> {
 	constructor(
@@ -33,7 +42,7 @@ export default class Action<T> {
    * key がない場合はテンプレートとして展開されず1回のみ callback が呼ばれる
    *
    */
-	async pathMap(callback: PATH_MAP_CALLBACK): Promise<void> {
+	async pathMap(callback: Callback): Promise<void> {
 		if (this.config.key) {
 		  const pathTemplate = Handlebars.compile(this.config.path);
 			/* eslint-disable_foo typescript-eslint/no-unsafe-argument */
@@ -42,7 +51,6 @@ export default class Action<T> {
 			for (const key of Object.keys(v)) {
 				const filePath = pathTemplate({key, context: this.context});
 			  await callback({
-					fullKey: `${this.config.key}.${key}`,
 					key,
 					path: filePath
 				});

@@ -7,14 +7,14 @@ export interface Variables {
 
 /** Model */
 export interface Model {
-	attributes: {[name: string]: ModelAttribute | string};
+	attributes: {[name: string]: ModelAttribute};
 	base?: string;
-	desc?: string;
+	desc: string;
 }
 
 /** Model's attribute */
 export interface ModelAttribute {
-	desc?: string;
-	optional?: boolean;
+	desc: string;
+	optional: boolean;
 	type: string;
 }

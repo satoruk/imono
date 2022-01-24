@@ -17,10 +17,8 @@
     "ajv": "8.8.2",
     "handlebars": "4.7.7",
     "ink": "^3.2.0",
-    "lodash": "4.17.21",
+    "lodash": "^4.17.21",
     "meow": "^9.0.0",
-    "quicktype": "15.0.260",
-    "quicktype-core": "6.0.70",
     "react": "^17.0.2",
     "typescript-json-schema": "0.52.0",
     "yaml": "1.10.2"

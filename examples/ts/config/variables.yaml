@@ -1,20 +1,30 @@
 models:
   base:
+    desc: Base
     attributes:
       id:
+        desc: ID
         type: string
-        optional: true
+        optional: false
   animal:
+    desc: Animal
     base: base
     attributes:
-      name: string
+      name:
+        desc: Name
+        type: string
+        optional: false
   family:
     base: base
     attributes:
       name:
+        desc: Name
         type: string
+        optional: false
       attr1:
+        desc: Name
         type: ${model.animal}
+        optional: false
     desc: |
       Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
       Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
