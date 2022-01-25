@@ -48,9 +48,9 @@ export default class Action<T> {
 			/* eslint-disable_foo typescript-eslint/no-unsafe-argument */
 			const v = get(this.context.variables, this.config.key) as Record<string, unknown>;
 			/* eslint-enable_foo @typescript-eslint/no-unsafe-argument */
-			for (const key of Object.keys(v)) {
+			for await (const key of Object.keys(v)) {
 				const filePath = pathTemplate({key, context: this.context});
-			  await callback({
+				await callback({
 					key,
 					path: filePath
 				});

@@ -33,8 +33,9 @@ export function indent(value: string, options: IndentOptions = {}): string {
 type WrapOptions = {
 	prefix?: string;
 	suffix?: number;
+	after?: (v: string) => string;
 };
 export function wrap(value: string, options: WrapOptions = {}): string {
-	const {prefix = '', suffix = ''} = options;
-	return value.split('\n').map(v => `${prefix}${v}${suffix}`).join('\n');
+	const {prefix = '', suffix = '', after = v => v} = options;
+	return value.split('\n').map(v => after(`${prefix}${v}${suffix}`)).join('\n');
 }
