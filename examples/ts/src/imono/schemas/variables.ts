@@ -1,8 +1,12 @@
 /* eslint @typescript-eslint/consistent-indexed-object-style: "off" */
 
 /** Variable configuration */
-export interface Variables {
+export interface ConfigVariables {
 	models: {[name: string]: Model};
+}
+
+export function normalizate(value: ConfigVariables): ConfigVariables {
+	return value;
 }
 
 /** Model */

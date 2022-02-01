@@ -1,17 +1,17 @@
 import {FileActionParameters} from 'imono/dist/model/action/file-action';
 
-import {Variables} from '../schemas';
+import {ConfigVariables} from '../schemas';
 
 import TextFileAction, {renderSection} from './text-file-action';
 import {defineImports, defineTypes, defineClass} from './model';
 
-export default class ModelAction extends TextFileAction<Variables> {
+export default class ModelAction extends TextFileAction<ConfigVariables> {
 	override async apply(src: string, parameters: FileActionParameters): Promise<string> {
 		if (!('key' in parameters)) {
 			throw new Error('key is required');
 		}
 
-		const key = parameters.key as string;
+		const key = parameters.key;
 		const className = this.toUpperCamelCase(key);
 		const model = this.variables.models[key];
 		if (!(model)) {

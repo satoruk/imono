@@ -22,7 +22,7 @@ export class SchemaGenerator {
 		try {
 			const schema = util.schema.generate({
 				file: this.source,
-				fullTypeName: 'Variables'
+				fullTypeName: 'ConfigVariables'
 			});
 			const json = JSON.stringify(schema, null, 2);
 			this.outputSchema.write(json);

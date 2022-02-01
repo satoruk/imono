@@ -23,3 +23,7 @@ $ foo --help
     $ foo --name=Jane
     Hello, Jane
 ```
+
+- '--init'
+  `variable.source` を元に JSON Schema を生成
+  生成先は `variable.schema` に指定されたパス

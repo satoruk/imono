@@ -5,14 +5,6 @@ import * as config from '../../model/config';
 import {Context} from '../../model/context';
 import {Action, PRIMITIVE_ACTIONS} from '../../model/action';
 
-interface HasCode {
-	code?: unknown;
-}
-
-function assertError<T>(value: T): value is T & Error & HasCode {
-	return typeof value === 'object' && value !== null && value instanceof Error;
-}
-
 /**
  * 何かしら定義されてれば、NonNullableと判断するアサーション
  * @param val 何かの値
@@ -41,42 +33,7 @@ export class Apply {
 	async execute() {
 		await this._progress.init('init');
 		await this._progress.done('done', async () => {
-			await this.prepare(this._progress.childSync(0.2, 'prepare'));
 			await this.apply(this._progress.childSync(0.99, 'apply'));
-		});
-	}
-
-	async prepare(emitter: Progress) {
-		await emitter.init('apply');
-		await emitter.done('done', async () => {
-			await emitter.progress(0.1, 'setup ts-node register');
-			try {
-			/* eslint-disable @typescript-eslint/no-var-requires */
-				// require('ts-node/register');
-				require('ts-node/register/transpile-only');
-				// Require('ts-node').register({
-				/*
-				CompilerOptions: {
-					module: 'CommonJS'
-				}
-				// */
-				// });
-			// Registerer.enabled(true);
-			// Registerer = require('ts-node').register({
-			// 	compilerOptions: {
-			// 		module: 'CommonJS'
-			// 	}
-			// });
-			/* eslint-enable @typescript-eslint/no-var-requires */
-			} catch (error: unknown) {
-				if (assertError(error) && error.code === 'MODULE_NOT_FOUND') {
-					throw new Error(
-						`Imono: 'ts-node' is required for the TypeScript configuration files. Make sure it is installed\nError: ${error.message}`
-					);
-				}
-
-				throw error;
-			}
 		});
 	}
 
@@ -112,7 +69,6 @@ export class Apply {
 			await emitter.progress(0, 'resolve action');
 			const targetAction = this.resolveAction(action);
 			await emitter.progress(0.2, 'execute action');
-			console.log('0.2 execute action');
 			await targetAction.execute(emitter.childSync(0.8, 'execute'));
 			await emitter.done('done');
 		} catch (error: unknown) {
